@@ -1,4 +1,7 @@
-= Spring Basics
+= Java Spring Basics
+
+You can find the training here: +
+https://bolcom.github.io/java-spring-basics/
 
 == Purpose
 
