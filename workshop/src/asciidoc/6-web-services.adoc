@@ -1,0 +1,13 @@
+= Web Services
+
+As you've seen in the previous exercises, Spring is not exclusively meant for web projects.
+However it is where it became the most popular.
+The reason for this is that without a framework like Spring it is much harder to set up a web service in Java yourself.
+You have to implement so called Servlets in order to be able to handle HTTP requests.
+Spring implements a servlet called the DispatcherServlet, the DispatcherServlet abstracts a lot of the difficulty of Java servlets away from you.
+This way you can handle HTTP requests by simply using annotations in your Java code just like we did in the previous exercise.
+
+==== References
+* http://docs.oracle.com/javaee/6/tutorial/doc/bnafe.html
+
+include::../../../labs/05-web-services/README.adoc[leveloffset=+1]

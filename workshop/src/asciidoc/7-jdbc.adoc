@@ -1,0 +1,16 @@
+= JDBC
+
+Cool, we made a REST API for our books, however our API is not much use if we don't actually store the data.
+
+Java has a library called `JDBC` (Java Database Connectivity).
+JDBC lets you manage database connections in a database-independent way.
+This is nice, because this way your application does not depend on a specific type of database.
+It is always good to prevent this kind of dependency so you can easily switch over to a different type of database.
+At some point you might want to change to a different database, for instance because it performs better for your use case or because it is cheaper.
+If you didn't use JDBC but something database specific, it will be much more work to migrate.
+
+
+==== References
+* http://www.oracle.com/technetwork/java/javase/jdbc/index.html
+
+include::../../../labs/06-jdbc/README.adoc[leveloffset=+1]

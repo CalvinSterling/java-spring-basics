@@ -1,0 +1,50 @@
+:backend: revealjs
+:revealjs_theme: black
+:revealjs_customtheme: theme/bol.com-v1/bol.com.css
+:revealjs_control: true
+:revealjs_center: true
+:revealjs_history: true
+:revealjs_transition: linear
+:source-highlighter: highlightjs
+:highlightjs_style: highlight.js/styles/solarized_light.css
+:highlightjs_style_alternative: highlight.js/styles/solarized_dark.css
+// Relative to generated HTML
+:imagesdir: ./images
+////
+Relative to original asciidoc document,
+as source code is processed before creation
+of the html-file
+////
+:sources: ../..
+:hide-uri-scheme:
+
+= presentation title
+author <url[contact]>
+
+== chapter 1 title
+
+=== chapter 1 sub-page 1
+
+* list item
+* list item
+* list item
+
+blablabla
+
+[NOTE.speaker]
+--
+speaker notes
+--
+
+=== chapter 1 sub-page 2
+
+*blablabla* blabla +
+blablabvla blalabla
+
+== chapter 2 title
+
+content
+
+== chapter 3 title
+
+content

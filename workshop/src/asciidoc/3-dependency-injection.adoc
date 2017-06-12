@@ -1,0 +1,31 @@
+= Maintainable Code
+
+So.. the last lab was fun right? Not really you say? Why? Oh it was hard to read the code because IntelliJ kept underlining it while complaining about "Code Duplication"?
+Who came up with that annoying warning?
+
+In the last lab it was of course a very annoying task to upgrade, you had to copy paste a lot of code. Copy pasting is always a sign of bad code and should be avoided as it can lead to bugs.
+Say we want all CoffeeDispensers to be more excited and say they are "Dispensing!!!" instead of just merely "Dispensing", we would now have to change the code in three places and might easily forget one.
+
+In fact we shouldn't have copy pasted at all, we should have redesigned our code, because the initial design was not done with an upgrade of the dispenser in mind.
+
+== Dependency Injection, Inversion of Control and Polymorphism
+What was the main thing that was wrong with the design of the CoffeeMachine class? It was made dependent on a specific implementation of CoffeeDispenser, MilkDispenser and SugarDispenser. This made upgrading the dispensers impossible to do without code duplication.
+
+Now let's explain those scary terms in the title of this section:
+
+If we want to make the coffee machine more independent we could pass the Dispensers as constructor parameters instead of initializing the new Dispenser objects in the constructor. This is called *Dependency Injection*, simple right?
+
+The user of the CoffeeMachine class now controls what kind of Dispensers it will give to the CoffeeMachine constructor. This is called *Inversion of Control*, simple right?
+
+For instance, we could now make CoffeeDispenserV2 extend the CoffeeDispenser class and override the dispense method.
+If we then initialize the CoffeeMachine class with a CoffeeDispenserV2, the CoffeeMachine won't know that it has been fooled by our masterous trickery and will execute our overridden version of the dispense method. This is called *Polymorphism*.
+
+However, if you just want to override methods it is usually cleaner to make an interface instead of extending a class.
+The reason for this is if for instance we add a new method to the CoffeeDispenser class, we could easily forget to override this new method in the CoffeeDispenserV2 class and thereby possibly introduce a bug.
+
+For a class which implements an interface it is guaranteed that the methods which are defined in the interface are all implemented.
+If we create a CoffeeDispenser interface with a dispense method, then each class which implements the CoffeeDispenser interface has to give its own implementation of the dispense method.
+If we extend the CoffeeDispenser interface with a new method, then we also need to make an implementation of this method in each class which implements the CoffeeDispenser interface.
+
+//== Lab 2: First In-Depth Lab
+include::../../../labs/02-dependency-injection/README.adoc[leveloffset=+1]

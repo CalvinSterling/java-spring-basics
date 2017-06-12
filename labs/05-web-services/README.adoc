@@ -1,0 +1,188 @@
+= Lab 5: Hendrik-Jan Online
+
+You've switched companies and are now working for an online store that sells books called `Hendrik-Jan Online`, known to the public as `hol.com`.
+Hol.com is using Spring based web services.
+You were hired as a Spring expert and tasked with the development of a new service called the BookService.
+The BookService will contain information about each book sold by hol.com and expose it via a REST API.
+
+In `labs/05-web-services` you can find the lab.
+
+The lab comes with a base project. In this lab we'll focus on all sources in the `webapp` directory.
+
+[source]
+----
+.
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── hol
+    │   │           └── book
+    │   │               ├── controller <!--1-->
+    │   │               │   ├── BooksController.java
+    │   │               │   └── WelcomeController.java
+    │   │               └── domain
+    │   │                   └── Book.java
+    │   ├── resources
+    │   └── webapp <!--2-->
+    │       ├── WEB-INF
+    │       │   ├── bookservice-servlet.xml
+    │       │   ├── jsp
+    │       │   │   └── welcome.jsp
+    │       │   └── web.xml
+    │       └── index.jsp
+    └── test
+        └── java
+----
+<1> A `Controller` is a class that can handle requests. We'll focus on these classes in the next lab.
+<2> The `webapp` directory contains all the sources that are relevant to getting your server up and running.
+
+We'll first walk through all the files in this directory. +
+Then we'll see if we can succeed in getting it deployed to a Tomcat server. +
+And finally we'll add some more endpoints.
+
+== web.xml
+The core of our web application is the web.xml file in `webapp/WEB-INF`.
+It has nothing to do with Spring, it is purely for Java web applications.
+
+[source%nowrap,xml]
+----
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+    <display-name>BookService</display-name> <!--1-->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>  <!--2-->
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>bookservice</servlet-name>  <!--4-->
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet  <!--3-->
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping> <!--5-->
+        <servlet-name>bookservice</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
+----
+<1> This is the name that will be displayed in your browser tab.
+<2> This is the template of the home page of the BookService.
+<3> Here you see the Spring DispatcherServlet defined.
+It will handle the incoming requests and make sure they end up in the right Controller class.
+You can define multiple servlets if you want to.
+<4> We gave our DispatcherServlet the name `bookservice`.
+<5> Here we define the url-patterns for the DispatcherServlet.
+Any request matching the url-patterns we state here will be routed to our DispatcherServlet.
+
+NOTE: **Url patterns:** +
+The url-pattern should be prepended to the path of the DispatcherServlet endpoint you try to reach. +
+To reach an endpoint defined in your Spring application the url is: +
+`host:port/**url-pattern**/path-to-endpoint` +
+ +
+The url-pattern `/` means any incoming request other than the request for the home page will be routed to your DispatcherServlet. +
+If you want it to handle the home page as well, you should add an empty url-pattern tag: +
+`<url-pattern><url-pattern>`
+
+== bookservice-servlet.xml
+Because in `web.xml` we defined the name of our DispatcherServlet to be `bookservice`, the DispatcherServlet will expect a Spring application context file called `bookservice-servlet.xml` at the same level as the `web.xml` file.
+
+Of course you can change this default behavior. For that you should insert the following tag in the declaration of your servlet: +
+[source%nowrap,xml]
+----
+<init-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/path-to-file/file-name.xml</param-value>
+</init-param>
+----
+
+The `bookservice-servlet.xml` file is basically the same thing as the `applicationContext.xml` file that we saw in the CoffeeMachine.
+
+[source%nowrap,xml]
+----
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.hol.book.controller"/> <!--1-->
+
+    <mvc:annotation-driven/> <!--2-->
+
+    <bean id="viewResolver" <!--3-->
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+          <!--class="org.springframework.web.servlet.view.UrlBasedViewResolver">--> <!--5-->
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/> <!--4-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
+----
+<1> Here we define a component scan on the controller package so the two controller classes will be added to the Spring IoC Container.
+<2> This tag adds support for web specific Java annotations used by the controller classes. Such as `@Controller` and `@RequestMapping`.
+<3> Here we define the first Bean of our web application. It is a ViewResolver. The ViewResolver will be able to find and render `.jsp` files.
+<4> This is the location where all `.jsp` files that can be found by the ViewResolver should be placed.
+<5> As you can see there are multiple types of ViewResolvers.
+
+=== References
+
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/view.html#view-jsp
+
+== JSP's
+Take a look at the `.jsp` files. JSP files are templates that get transformed into HTML.
+You can define variables like the `${welcome}` variable in `welcome.jsp`.
+You can then set this variable from your Java code like is done in the Controller classes. +
+You can also add logic using `JSTL` (JSP Standard Tag Library).
+However, it is considered best practice to do as little logic as possible in your jsp files.
+
+== Exercise 9
+Deploy the BookService to a Tomcat server.
+
+. Download a Tomcat 8 zip from the official web site.
+. In IntelliJ add a run configuration for Tomcat Server to your project.
+. Use the Tomcat you just downloaded for this configuration.
+. In the deployment tab configure the exploded war of the BookService to be deployed at startup.
+
+When you have your server running, try to find the welcome page of the BooksController. Why is it under that URL?
+
+Then try changing the url-pattern to: +
+`<url-pattern>/dispatcher/*</url-pattern>` +
+And figure out how you can still reach the endpoints handled by the DispatcherServlet.
+
+
+== Exercise 10
+Add another JSP template with an endpoint and experiment with the features of jsp's. +
+In the Java code of your endpoint create a list of strings with some arbitrary values.
+Try displaying an unordered list with a bullet for each element in the list.
+
+You need the following dependencies in order to be able to use jstl tags in your jsp files:
+[source%nowrap,xml]
+----
+<dependency>
+    <groupId>org.apache.taglibs</groupId>
+    <artifactId>taglibs-standard-spec</artifactId>
+    <version>1.2.1</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.taglibs</groupId>
+    <artifactId>taglibs-standard-impl</artifactId>
+    <version>1.2.1</version>
+</dependency>
+----
+
+== Exercise 11
+The base project contains a fake `DAO` (Data Access Object), which stores the books in an ArrayList instead of in a database.
+In the next lab we'll turn this into real database operations, but for now we focus solely on creating endpoints.
+
+Extend the right classes such that the book service compiles again. +
+Then extend the BooksController class so that we expose a full REST API for our book class.
+Meaning all CRUD (Create Read Update Delete) methods in the BookDao will have a corresponding endpoint which matches the REST specification.
+
+For testing your endpoints you can use a tool like Postman.
+
+== Resources
+* http://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/index.html
+* https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm
+* http://www.restapitutorial.com/lessons/whatisrest.html
+* http://www.restapitutorial.com/lessons/httpmethods.html

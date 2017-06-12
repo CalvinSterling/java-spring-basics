@@ -1,0 +1,13 @@
+include 'workshop'
+include 'presentation'
+
+rootProject.name = 'java-spring-basics'
+rootProject.children.each { project ->
+    String fileBaseName = project.name
+    project.projectDir = new File(settingsDir, fileBaseName)
+    assert project.projectDir.isDirectory()
+
+    def buildFileName = "${fileBaseName}.gradle"
+    project.buildFileName = buildFileName
+    assert project.buildFile.isFile()
+}

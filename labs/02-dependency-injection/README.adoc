@@ -1,0 +1,28 @@
+= Lab 2: Dependency Injection
+
+In this lab we will redesign our coffee machine such that it is more easy to maintain.
+
+In `labs/02-dependency-injection` you can find the lab.
+
+== Exercise 3
+In this exercise you will redesign the coffee machine such that the CoffeeMachine class does not depend on specific Dispenser implementations anymore.
+
+The ever so diligent teammate of yours has already given you a head start with the redesign.
+Please continue the implementation of the coffee machine in such a way that all the tests pass.
+
+
+== Exercise 4
+In the last exercise it must have been satisfying to see the CoffeeMachine class become so much cleaner, however you might have noticed that we still have a lot of code duplication over the different kind of Dispensers.
+What can we do about that?
+
+If we want to create a universal Dispenser interface, we also need a universal ingredient class that we can pass to its dispense function. Let's use class extension for that.
+
+Create an Ingredient abstract class and use it to create a universal Dispenser interface. Don't fail your teammate, make his tests pass =)
+
+NOTE: If you really want to make it pretty, you could also refactor the Recipe by making an IngredientPercentage class. Look at the "extra-pretty" solution in the solutions folder to see what I mean.
+
+== Resources
+
+* https://docs.oracle.com/javase/tutorial/java/concepts/interface.html
+
+* http://docs.oracle.com/javase/tutorial/java/IandI/abstract.html

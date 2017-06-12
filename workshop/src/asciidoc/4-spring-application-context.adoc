@@ -1,0 +1,38 @@
+= The Spring IoC Container
+
+Finally! A section that seems to be about Spring! You're right! Now that we have learned about Dependency Injection and Inversion of Control we're finally ready to learn the first things about Spring.
+
+The main disadvantage of Inversion of Control is that the user of a class has to have the dependencies for that class or create them.
+If I want to create an object A which needs objects B, I need to make a B object before I can make an A object.
+
+In our case we need to make a Dispenser object before we can make a CoffeeMachine object.
+Let's say the CoffeeMachine would also require a DispenserCleaner object.
+Now we need to suddenly make two objects before we can make a CoffeeMachine.
+And what if this DispenserCleaner would require a SoapContainer and Brush class.
+Now we need to make 4 objects before we can make a CoffeeMachine.
+As you see this can get quite out of hand easily.
+
+
+Especially in large applications we might find that the same objects are created multiple times in different places.
+This is inefficient from with a performance perspective as well as from a maintainability perspective.
+
+
+. Performance:
+* Creating new dependencies is less efficient than reusing dependencies that were created by someone else
+
+. Maintainability:
+* If you want to upgrade all code to a new version of Dispenser you still have to change code in multiple places
+
+
+So, it would be nice to have a way to reuse your objects. This is where frameworks like Spring become interesting.
+Spring makes it really easy to manage your dependencies on an application level.
+
+Spring has a thing called the Inversion of Control Container.
+The IoC container contains Java objects that are called Beans.
+A Spring Bean is basically an automatically instantiated class.
+You can use it anywhere in your application, Spring will make sure that the object is instantiated and hand it to you.
+
+You can access Beans in the Inversion of Control Container via a thing called the ApplicationContext.
+The ApplicationContext is the place where you configure your Beans, you say how you want Spring to initialize the classes, you can give them a nice name and many more things.
+
+include::../../../labs/03-spring-application-context/README.adoc[leveloffset=+1]

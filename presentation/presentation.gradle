@@ -1,0 +1,38 @@
+plugins {
+    id "org.asciidoctor.convert" version "1.5.3"
+    id "com.github.jruby-gradle.base" version "1.3.0"
+    id "distribution"
+}
+
+dependencies {
+    gems 'rubygems:asciidoctor-diagram:1.5.1'
+}
+
+def asciidoctorOutputDir = "$buildDir/asciidoc"
+
+asciidoctorj { version = '1.5.4.1' }
+ext.backendPath = "${rootDir}/.presentation-backends/reveal.js"
+asciidoctor {
+    classpath = project.configurations.asciidoctor
+    sourceDir = file('src/docs/asciidoc')
+    sources {
+        include 'presentation.adoc'
+    }
+    resources {
+        from("${backendPath}/resources") {
+            include '**/*'
+        }
+        from("${sourceDir}/images") {
+            include '**/*'
+            into('images')
+        }
+    }
+    backends = ['html5']
+    requires = ['slim', 'tilt', 'thread_safe']
+    logDocuments = true
+    options = [
+            template_engine: 'slim',
+            template_dirs  : ["${backendPath}/templates"]
+    ]
+}
+build.dependsOn asciidoctor

@@ -1,0 +1,19 @@
+= Lab 1: What is unmaintainable code?
+
+This lab is meant to help you understand some issues that can arise when software is designed in an unmaintainable way.
+
+We're going to add more bad code to already bad code. Are you ready? Good, let's do this!
+
+In `labs/01-unmaintainable-code` you can find the first lab.
+It contains a simple coffee machine application,
+written in Java.
+
+== Exercise 1
+Your team has been asked to upgrade the CoffeeMachine's dispensers to V2, while keeping V1 operational.
+The previous engineer working on this upgrade was very careful and applied Test Driven Development, so you'll find a failing unit test.
+Your goal is to create XxxDispenserV2 classes and use them in the brewV2 method in such a way all unit tests pass.
+
+== Exercise 2
+A year has passed since you upgraded to V2 (yes, I know, time flies right?) and Dispenser Version 3 is now ready to implement.
+The previous engineer was extremely responsible again and prepared a test for you.
+Please use the same design method as in exercise 1 in order to upgrade to V3 while keeping V1 and V2 operational in such a way all unit tests pass.

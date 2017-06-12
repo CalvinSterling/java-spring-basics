@@ -1,0 +1,11 @@
+= Java Annotations
+
+Wasn't it awesome that we could meet the management's requirements with such a little amount of code using Spring?
+
+So using Spring definitely gives us a lot of power, however it is not nice to debug XML files.
+It would be really cool if we can configure our Beans in Java so we can debug them more easily.
+
+Luckily, since version 3.0, Spring comes with an option to use Java annotation based configuration.
+
+
+include::../../../labs/04-java-annotations/README.adoc[leveloffset=+1]

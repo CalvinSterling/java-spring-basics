@@ -1,0 +1,53 @@
+= Lab 3: The Spring Application Context
+
+In this lab we will introduce Spring in our coffee machine and we'll define and retrieve our first Beans.
+
+In `labs/03-spring-application-context` you can find the lab.
+
+== Exercise 5
+Add Spring version 4.2.0.RELEASE to the coffee machine project. +
+Create an application context xml file and define a coffee machine bean in order to make the the test in the SpringBeansTest class pass.
+
+Did the test pass? Cool! +
+Now take a look at the test class, coffeeMachine and coffeeMachine2 are created in a different way. +
+Please explain to your neighbor what the difference is.
+
+And why does the following line in the test pass?
+[source]
+----
+assertEquals(coffeeMachine, coffeeMachine2);
+----
+
+Now use setter injection for your CoffeeMachine bean and make the same test pass.
+
+== Exercise 6
+Last year after the release of the Chocolate Milk Machine our company received numerous law suits from lactose intolerant people because of traces of real milk in the lactose free chocolate milk.
+Management is afraid it might receive these lawsuits for the Coffee Machine as well and therefore told us to make sure we wouldn't have the same problem.
+
+We decided we needed to make a second coffee machine Bean. +
+The idea is that this Bean will only be used to brew coffee recipes that don't contain milk.
+
+Create the second coffee Machine bean and make the test pass.
+
+Then read the comment in the first test.
+
+== Exercise 7
+The coffee machine was brought out last month and we still feel very proud of our achievements.
+However despite our best efforts, a lactose intolerant journalist released an article which went viral today.
+In the article he's complaining about how he missed his once in a lifetime opportunity to interview the president because he drank a "black" coffee from our machine.
+
+The reason for this is that we are reusing the same Dispenser object for every CoffeeMachine object.
+So even though we use a lactoseFreeCoffeeMachine object, internally it uses the exact same Dispenser object as our normal coffeeMachine.
+Hence the coffees produced by the lactose free CoffeeMachine will still contain traces of milk.
+
+Management was furious to hear about our performance and maintainability optimizations. "Insanitary" is what they said about our beautiful design.
+They demanded we use a fresh Dispenser object for our lactose free CoffeeMachine Bean as well as for all future CoffeeMachine Beans we might add.
+
+You have been challenged with the task of making an emergency fix for the coffee machine. Your teammate already made a unit test to test for unique Dispenser objects.
+Somewhat reluctant to smudge our beautiful maintainable design, you are looking for the easiest way to satisfy the management's requirements.
+
+== Resources
+* http://mvnrepository.com/
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/beans.html#beans-factory-instantiation
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/beans.html#beans-factory-collaborators
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/beans.html#beans-factory-scopes

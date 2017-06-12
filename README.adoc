@@ -1,0 +1,19 @@
+= Spring Basics
+
+== Purpose
+
+The purpose of this training is to get you familiar with the basic functions of Spring as well as to show you why they are useful.
+
+In order to help you see why Spring is useful, the first part of the training focuses on some important design patterns instead of diving straight into Spring.
+
+This training assumes you are able to write code in Java. +
+
+
+== How to develop?
+
+. Checkout this git repo
+. Do a `gradlew build` in the root directory
+. You can now find the workshop in `workshop/build/distributions`
+. Extract it and
+** Open the index file with your browser
+** Open the extracted folder in IntelliJ or another editor to do the exercises

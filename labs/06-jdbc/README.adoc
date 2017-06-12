@@ -1,0 +1,25 @@
+= Lab 6: JDBC
+Alright! Let's get that data saved!
+
+Choose a SQL database like MariaDB or Postgres, install it locally (or use docker) and make a database called `bookservicedb`
+with user `bookserviceuser` and password `password`.
+Then look for the jdbc driver maven dependency of the database that you chose and include it in your pom-file.
+
+== Exercise 12
+Configure a Bean of type `BasicDataSource` and connect it to your bookservicedb.
+Implement a class called `RealBookDao` which implements the `BookDao` interface and make it use your database.
+Then make sure an instance of the real book dao is autowired into the `BooksController` class.
+
+== Resources
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/jdbc.html
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/jdbc.html#jdbc-NamedParameterJdbcTemplate
+
+== Exercise 13
+If you want to challenge yourself, try some of the following things:
+
+* Try to write some tests which test the ReadBookDao using an in memory database like H2.
+* Try to use prepared statements instead of the NamedParameterJdbcTemplate.
+* Try to create a deployable and functional web service from scratch without peeking into the code of this training.
+
+== Resources
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/jdbc.html#jdbc-embedded-database-support

@@ -1,0 +1,26 @@
+= Lab 4: Java Annotations
+
+In `labs/04-java-annotations` you can find the lab.
+
+== Exercise 8
+In the project for this exercise you'll find one failing test in SpringBeansTest. Explain to your neighbor why this test fails while the other tests in this file pass.
+
+Make the other tests in this file fail as well by editing the beans in the application context.
+
+Now make all tests pass by using Java annotation based auto wiring via constructor dependency injection.
+
+Remove the annotation you just added and now make all tests pass by auto wiring using setter dependency injection.
+
+Remove the dispenser bean from the application context and make the tests pass again using a Java annotated dispenser bean.
+For this to work you need to make a Java configuration file where you declare your Dispenser Bean and create a Bean of this configuration file in your application context XML file.
+
+Put a breakpoint in your Java Bean definition. Run the tests in debug mode and see how you are now able to properly debug your Bean! =)
+
+Now remove your Dispenser Bean definition and use annotated components to fix the tests again.
+
+NOTE: A Component is exactly the same as a Bean, but a Bean is explicitly defined where a Component is auto-detected and auto-configured.
+
+== Resources
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/beans.html#beans-annotation-config
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/beans.html#beans-java
+* http://docs.spring.io/spring/docs/4.2.0.RELEASE/spring-framework-reference/html/beans.html#beans-scanning-autodetection

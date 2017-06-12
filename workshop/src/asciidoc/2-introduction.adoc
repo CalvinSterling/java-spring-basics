@@ -1,0 +1,17 @@
+= Introduction
+
+During this training we'll write some bad code as well as some good code and we will see how Spring helps us to write good and maintainable code.
+
+
+""
+Labs often contain references to resources.
+These resources provide you with more in-depth information on how things work,
+and you can most probably not do the exercises without reading through the
+resources. So, use the resources!
+""
+
+== Download the zip
+link:{project-name}.zip[download the zip with the labs]
+
+//== Lab 1: Build Your Own
+include::../../../labs/01-unmaintainable-code/README.adoc[leveloffset=+1]
