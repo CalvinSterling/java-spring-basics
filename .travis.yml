@@ -28,4 +28,4 @@ after_success:
   - git status
   - git commit -m "Deploy to GitHub Pages"
   - echo $TRAVIS_REPO_SLUG
-  - git push --force "https://${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG" master:gh-pages > /dev/null 2>&1
+  - git push --force "https://${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG" master:gh-pages
