@@ -1,4 +1,4 @@
-= Introduction Test
+= Introduction
 
 During this training we'll write some bad code as well as some good code and we will see how Spring helps us to write good and maintainable code.
 
