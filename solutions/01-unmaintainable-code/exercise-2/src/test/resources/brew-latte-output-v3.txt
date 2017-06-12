@@ -1,0 +1,8 @@
+Brewing Latte...
+Dispensing 60% of Douwe Egberts
+Adding Extra Magic Flavor
+Dispensing 30% of Fresh Milk
+Adding Extra Magic Flavor
+Dispensing 10% of White Sugar
+Adding Extra Magic Flavor
+Done

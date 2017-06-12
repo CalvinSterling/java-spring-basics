@@ -1,0 +1,5 @@
+Brewing Latte...
+Dispensing 60% of Douwe Egberts
+Dispensing 30% of Fresh Milk
+Dispensing 10% of White Sugar
+Done
