@@ -3,5 +3,5 @@ package logic.dispenser;
 import domain.Milk;
 
 public interface MilkDispenser {
-    void dispense(Milk coffee, int percentage);
+    void dispense(Milk milk, int percentage);
 }
